@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="MUSH Pagi Farm: sistem IoT-Robotik pengubah sayur off-grade hidroponik menjadi silase premium. Fermentasi drum 50 liter dipantau nirkabel agar gagal ketahuan sebelum drum dibuka.">
+<meta name="theme-color" content="#061F17">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MUSH Pagi Farm — sayuran off-grade jadi silase premium">
+<meta property="og:description" content="Empat tahap robotik, enam titik pantau, dan satu ambang yang sama untuk setiap drum. Data contoh_batch B-024 dan B-025 ditampilkan apa adanya.">
+<meta property="og:image" content="img/hero-lebar.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<title>MUSH Pagi Farm, sayur off-grade menjadi silase premium</title>
+<link rel="stylesheet" href="style.css?v=20261018a">
+</head>
+<body class="bg-kertas font-sans text-[16px] leading-[1.65] text-tinta">
+<div class="progres" id="progres" aria-hidden="true"></div>
+
+<svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-termometer" viewBox="0 0 200 150">
+    <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M86 96V34a14 14 0 0 1 28 0v62a26 26 0 1 1-28 0Z"/>
+      <path d="M100 60v46" stroke="#F2D520"/>
+      <circle cx="100" cy="106" r="9" fill="#F2D520" stroke="none"/>
+      <path d="M140 44h22M140 62h14"/>
+      <path d="M36 118c8-6 14-6 22 0" opacity=".5"/>
+    </g>
+  </symbol>
+  <symbol id="i-daun" viewBox="0 0 200 150">
+    <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M100 138V72"/>
+      <path d="M100 108c-26 0-42-17-42-39 26 0 42 17 42 39Z"/>
+      <path d="M100 96c26 0 42-17 42-39-26 0-42 17-42 39Z"/>
+      <path d="M100 72c-20 0-32-13-32-30 20 0 32 13 32 30Z"/>
+    </g>
+  </symbol>
+  <symbol id="i-panah" viewBox="0 0 24 24">
+    <path d="M4 12h15m0 0-6-6m6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="i-main" viewBox="0 0 24 24">
+    <path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor"/>
+  </symbol>
+</defs></svg>
+
+<a class="lewati" href="#ringkasan">Lewati ke konten utama</a>
+
+<main>
+
+<!-- Adegan 01 / 07 · PEMBUKA -->
+<section class="adegan adegan-malam hero" id="ringkasan" aria-labelledby="hero-judul">
+  <div class="bungkus hero-isi">
+    <div class="hero-teks">
+      <p class="slate" aria-hidden="true">Adegan 01 / 07 · Pembuka</p>
+      <p class="sabel">MUSH · SensorIX · Pagi Farm</p>
+      <h1 class="judul-besar" id="hero-judul">Sayur reject jadi<br><span class="judul-rsdk">silase premium.</span></h1>
+      <p class="hero-sari"><span class="sari-ikon" aria-hidden="true"><svg viewBox="0 0 200 150" width="26" height="26"><use href="#i-termometer"></use></svg></span>Empat tahap robotik, enam titik pantau, dan satu ambang yang sama untuk setiap drum.</p>
+    </div>
+    <div class="hero-sisi">
+      <figure class="letterbox letterbox-zoom">
+        <picture>
+          <source type="image/avif" media="(min-width: 1000px)" srcset="img/hero-lebar.avif">
+          <source type="image/webp" media="(min-width: 1000px)" srcset="img/hero-lebar.webp">
+          <source type="image/avif" srcset="img/hero.avif">
+          <source type="image/webp" srcset="img/hero.webp">
+          <img src="img/hero.jpg" alt="Selada hidroponik tumbuh di dalam saluran" width="760" height="972" fetchpriority="high" decoding="async">
+        </picture>
+        <figcaption class="foto-penanda">Foto ilustrasi</figcaption>
+      </figure>
+      <p class="hero-kecil">Sayuran off-grade hidroponik selama ini dijual murah sebagai pakan mentah. MUSH memfermentasinya bersama dedak, molase, dan EM4, lalu memantau suhunya secara nirkabel, tanpa kabel yang membobol segel drum.</p>
+      <p class="aksi-rio">
+        <a class="tombol-kuning" href="#data">Lihat kondisi drum <svg class="ikon-panah" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></a>
+        <button class="tombol-putar" type="button" id="btn-putar" data-butuh-js aria-label="Lompat ke alur kerja"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-main"></use></svg></button>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="larut larut-ke-malam" aria-hidden="true"></div>
+
+<!-- Adegan 02 / 07 · BUKTI -->
+<section class="adegan adegan-terang" id="rangkaian" aria-labelledby="rangkaian-judul">
+  <div class="bungkus">
+    <p class="slate" aria-hidden="true">Adegan 02 / 07 · Bukti</p>
+    <h2 class="sr-only" id="rangkaian-judul">Reading drum dan tren suhu terakhir</h2>
+    <div class="rangkaian">
+      <article class="kartu-krem muncul" aria-labelledby="drum-judul">
+        <div class="kartu-kepala">
+          <p class="kartu-label" id="drum-id">Drum B-024</p>
+          <span class="stempel" id="drum-stempel">Dalam target</span>
+        </div>
+        <p class="angka-besar"><span id="drum-suhu">41,2</span><span class="satuan">&deg;C</span></p>
+        <p class="kartu-sisa">Suhu DS18B20 di dalam drum, hari <span id="drum-hari">9 / 14</span></p>
+        <div class="drum-pilih" role="group" aria-label="Pilih drum" data-butuh-js>
+          <button type="button" id="btn-b024" aria-pressed="true">B-024</button>
+          <button type="button" id="btn-b025" aria-pressed="false">B-025</button>
+        </div>
+        <div class="kerangka-kotak" id="drum-muat" role="status" hidden>
+          <div class="kerangka"></div>
+          <div class="kerangka pendek"></div>
+          <p class="kartu-sisa">Memuat reading drum…</p>
+        </div>
+        <div class="galat" id="drum-galat" role="status" hidden>
+          <p class="m-0"><strong>Gagal membaca drum.</strong></p>
+          <p class="kartu-sisa">Contoh gangguan koneksi. Data terakhir tetap ditampilkan di dasbor agar tim bisa lanjut kerja.</p>
+          <button class="tombol-kecil" id="btn-coba" type="button" data-butuh-js>Coba lagi</button>
+        </div>
+        <div id="drum-isi" role="status" aria-live="polite">
+          <ul class="kartu-daftar">
+            <li><span>Kelembapan</span><strong id="drum-hum">62%</strong></li>
+            <li><span>Label ML</span><strong id="drum-ml">Asam laktat</strong></li>
+          </ul>
+          <div class="track" role="progressbar" aria-label="Progres fermentasi drum B-024" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" id="drum-bar-wrap"><div id="drum-bar" style="width:64%"></div></div>
+          <p class="kartu-sisa"><strong id="drum-pct">64%</strong> progres fermentasi · <span id="drum-sumber">RF433 ke ESP32</span></p>
+        </div>
+      </article>
+
+      <article class="kartu-hijau muncul">
+        <div class="kartu-hijau-teks">
+          <h3>Fermentasi terjaga di 40 sampai 45 &deg;C</h3>
+          <p>Enam titik pantau, satu arah data. Drum yang keluar dari pita target ditandai di dasbor sebelum isinya mulai berubah.</p>
+        </div>
+        <div class="grafik" role="img" aria-label="Grafik batang suhu tujuh reading terakhir: 41,2; 41,1; 41,3; 40,9; 42,1; 45,4; 41,0 derajat Celsius">
+          <span style="height:52%"></span><span style="height:48%"></span><span style="height:58%"></span><span style="height:44%"></span><span style="height:72%"></span><span class="luar" style="height:96%"></span><span style="height:50%"></span>
+        </div>
+        <a class="tombol-bulat" href="#ambang" aria-label="Lihat angka target">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="larut larut-ke-malam-dari-terang" aria-hidden="true"></div>
+
+<!-- Adegan 03 / 07 · PROSES -->
+<section class="adegan adegan-malam" id="sorot" aria-labelledby="sorot-judul">
+  <div class="bungkus">
+    <p class="slate" aria-hidden="true">Adegan 03 / 07 · Proses</p>
+    <div class="sorot-kepala">
+      <h2 class="judul-adegan" id="sorot-judul"><span>Yang dijaga,</span><span>bukan cuma tampilan.</span></h2>
+      <p>Suhu, kelembapan, dan lama fermentasi. Ketiganya punya angka yang sama untuk setiap drum, jadi dua batch berbeda bisa dibandingkan tanpa perlu menebak.</p>
+    </div>
+    <figure class="letterbox letterbox-sorot muncul">
+      <picture>
+        <source type="image/avif" srcset="img/r03.avif">
+        <source type="image/webp" srcset="img/r03.webp">
+        <img id="sorot-foto" src="img/r03.jpg" alt="Karung silase plastik tertimbun di lapangan" width="700" height="520" loading="lazy" decoding="async">
+      </picture>
+      <figcaption class="foto-penanda">Foto ilustrasi</figcaption>
+      <div class="scrim-bawah sorot-scrim">
+        <span class="lencana" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><use href="#i-daun"></use></svg></span>
+        Tiap lapis disemprot molase dan EM4, lalu ditekan rapat supaya udara tidak masuk dan proses anaerob tetap terjaga.
+        <p class="m-0"><a class="tombol-kuning" href="#alur">Lihat alur kerja <svg class="ikon-panah" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></a></p>
+      </div>
+    </figure>
+    <div class="sorot-bawah" data-butuh-js>
+      <div class="thumb-daftar" role="group" aria-label="Ganti gambar proses">
+        <button type="button" class="thumb aktif" data-foto="img/r03.webp" data-alt="Karung silase plastik tertimbun di lapangan" aria-label="Tampilkan silase di lapangan" aria-pressed="true"><img src="img/thumb-1.webp" alt="" width="400" height="400" loading="lazy" decoding="async"></button>
+        <button type="button" class="thumb" data-foto="img/r02.webp" data-alt="Jagung segar di dalam peti kayu di pasar pano" aria-label="Tampilkan jagung segar" aria-pressed="false"><img src="img/thumb-2.webp" alt="" width="400" height="400" loading="lazy" decoding="async"></button>
+        <button type="button" class="thumb" data-foto="img/sorot.webp" data-alt="Tanaman hijau segar dalam pot keramik" aria-label="Tampilkan tanaman dalam pot" aria-pressed="false"><img src="img/thumb-3.webp" alt="" width="400" height="400" loading="lazy" decoding="async"></button>
+      </div>
+      <p class="sorot-cat">Tiga hal yang menentukan mutu akhir: aroma asam fermentasi, tanpa jamur, dan warna hijau kekuningan.</p>
+</div>
+  </div>
+</section>
+
+<div class="larut larut-ke-hijau" aria-hidden="true"></div>
+
+<!-- Adegan 04 / 07 · MESIN -->
+<section class="adegan adegan-hijau" id="alur" aria-labelledby="alur-judul">
+  <div class="bungkus">
+    <p class="slate" aria-hidden="true">Adegan 04 / 07 · Mesin</p>
+    <div class="alur-kepala muncul">
+      <h2 class="judul-adegan" id="alur-judul"><span>Empat mesin,</span><span>satu alur.</span></h2>
+      <div class="panah-pair" data-butuh-js>
+        <button type="button" class="tombol-bulat putih" id="alur-prev" aria-label="Tahap sebelumnya"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></button>
+        <button type="button" class="tombol-bulat" id="alur-next" aria-label="Tahap berikutnya"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></button>
+      </div>
+    </div>
+    <div class="alur-garis" aria-hidden="true"><span id="alur-isi-garis"></span></div>
+    <div class="alur-baris" id="alur-baris" tabindex="0" role="region" aria-label="Tahap proses R01 sampai R04, bisa digeser dengan keyboard">
+      <article class="kartu-tahap aktif">
+        <figure class="bingkai"><img src="img/r01.webp" alt="Sayuran dipotong dengan pisau di atas talenan" width="700" height="520" loading="lazy" decoding="async"><span class="foto-penanda">Foto ilustrasi</span></figure>
+        <p class="chip">R01</p>
+        <h3>Cacah deteksi visual</h3>
+        <p>Pisau menyala saat kamera menemukan sayur, berhenti otomatis saat ukuran cacahan sudah sesuai.</p>
+      </article>
+      <article class="kartu-tahap">
+        <figure class="bingkai"><img src="img/r02.webp" alt="Jagung segar di dalam peti kayu di pasar pano" width="700" height="520" loading="lazy" decoding="async"><span class="foto-penanda">Foto ilustrasi</span></figure>
+        <p class="chip">R02</p>
+        <h3>Lapisi dan semprot</h3>
+        <p>Cacahan dan dedak masuk drum 50 liter berlapis, tiap lapis disemprot molase dan EM4.</p>
+      </article>
+      <article class="kartu-tahap">
+        <figure class="bingkai"><img src="img/r03.webp" alt="Karung silase plastik tertimbun di ladang" width="700" height="520" loading="lazy" decoding="async"><span class="foto-penanda">Foto ilustrasi</span></figure>
+        <p class="chip">R03</p>
+        <h3>Padatkan pres berulir</h3>
+        <p>Adonan ditekan sampai sensor membaca tekanan target. Kantong udara hilang, anaerob terjaga.</p>
+      </article>
+      <article class="kartu-tahap">
+        <figure class="bingkai"><img src="img/r04.webp" alt="Tumpukan karung di dalam gudang" width="700" height="520" loading="lazy" decoding="async"><span class="foto-penanda">Foto ilustrasi</span></figure>
+        <p class="chip">R04</p>
+        <h3>Timbang dan segel</h3>
+        <p>Setelah fermentasi selesai, silase ditakar 5 kg dengan load cell lalu disegel heat sealer.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="larut larut-ke-malam" aria-hidden="true"></div>
+
+<!-- Adegan 05 / 07 · AMBANG -->
+<section class="adegan adegan-malam adegan-ambang" id="ambang" aria-labelledby="ambang-judul">
+  <p class="sisi-teks sisi-kiri" aria-hidden="true">AMBANG BAKU KANDANG · AMBANG BAKU KANDANG</p>
+  <p class="sisi-teks sisi-kanan" aria-hidden="true">AMBANG BAKU KANDANG · AMBANG BAKU KANDANG</p>
+  <div class="bungkus">
+    <p class="slate" aria-hidden="true" style="justify-content:center">Adegan 05 / 07 · Ambang</p>
+    <div class="ambang-kepala muncul">
+      <h2 class="judul-adegan" id="ambang-judul"><span>Tiga angka yang</span><span>tidak berubah.</span></h2>
+      <p class="ambang-sub">Ditulis di kontrak dan di dinding kandang, dipakai setiap batch tanpa pengecualian.</p>
+    </div>
+    <div class="lingkaran-daftar">
+      <article class="lingkaran muncul">
+        <p class="lingkaran-nilai hitung" data-nilai="40">40&ndash;45 &deg;C</p>
+        <h3>Suhu fermentasi</h3>
+        <p>Di bawah 40 &deg;C fermentasi melambat. Di atas 45 &deg;C mikroorganisme ikut berhenti bekerja.</p>
+      </article>
+      <article class="lingkaran muncul">
+        <p class="lingkaran-nilai hitung" data-nilai="55">55&ndash;70 %</p>
+        <h3>Kelembapan</h3>
+        <p>Dedak 35 persen menyerap kelebihan air, sehingga aditif tetap bekerja tanpa adonan terlalu basah.</p>
+      </article>
+      <article class="lingkaran muncul">
+        <p class="lingkaran-nilai hitung" data-nilai="7">7&ndash;14 hari</p>
+        <h3>Lama fermentasi</h3>
+        <p>Panen setelah jendela ini. pH 3,5 sampai 4,2 dicek manual berkala sebagai validasi.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="larut larut-ke-terang" aria-hidden="true"></div>
+
+<!-- Adegan 06 / 07 · DATA -->
+<section class="adegan adegan-terang" id="data" aria-labelledby="data-judul">
+  <div class="bungkus">
+    <p class="slate" aria-hidden="true">Adegan 06 / 07 · Data</p>
+    <div class="data-kepala muncul">
+      <h2 class="judul-adegan" id="data-judul"><span>Angka dan</span><span>data contoh.</span></h2>
+      <p>Semua angka di halaman ini contoh dari SEED dasbor, bukan reading live. Ganti drum untuk melihat status berubah, atau sengaja gagalkan supaya tampilan error bisa dilihat.</p>
+    </div>
+    <div class="data-tubuh">
+      <div class="kartu-log muncul">
+        <div class="log-kontrol" role="group" aria-label="Kontrol data contoh" data-butuh-js>
+          <button class="tombol-kecil" id="demo-b024" type="button" aria-pressed="true">Drum B-024</button>
+          <button class="tombol-kecil" id="demo-b025" type="button" aria-pressed="false">Drum B-025</button>
+          <button class="tombol-kecil" id="demo-next" type="button">Reading berikut</button>
+        </div>
+        <div class="log-kontrol" data-butuh-js>
+          <button class="taut" id="demo-gagal" type="button">Simulasikan gangguan</button>
+          <button class="taut" id="demo-kosong" type="button">Kosongkan log</button>
+        </div>
+        <div class="kerangka-kotak" id="demo-muat" role="status" hidden>
+          <div class="kerangka"></div>
+          <p class="kartu-sisa">Mengambil reading…</p>
+        </div>
+        <div class="galat" id="demo-galat" role="status" hidden>
+          <p class="m-0"><strong>Reading tidak masuk.</strong> <span class="kartu-sisa">Periksa gateway ESP32 dan router 4G, lalu ulangi.</span></p>
+          <button class="tombol-kecil" id="demo-ulang" type="button" data-butuh-js>Coba lagi</button>
+        </div>
+        <div class="kosong" id="demo-kosong-pesan" role="status" hidden>
+          <p class="m-0"><strong>Belum ada reading untuk drum ini.</strong></p>
+          <p class="kartu-sisa">Log dikosongkan untuk demo. Muat ulang contoh untuk mengembalikan tiga baris terakhir.</p>
+          <button class="tombol-kecil" id="demo-pulih" type="button" data-butuh-js>Muat ulang contoh</button>
+        </div>
+        <table class="log" id="demo-tabel">
+          <caption id="demo-caption">Tiga reading terakhir drum B-024</caption>
+          <thead><tr><th scope="col">Waktu</th><th scope="col">Suhu</th><th scope="col">Rh</th></tr></thead>
+          <tbody id="demo-tbody"></tbody>
+        </table>
+        <p class="kartu-sisa">Status: <span id="demo-status">Dalam target</span> · Label ML: <span id="demo-ml">Asam laktat</span></p>
+        <p class="m-0"><a class="tombol-kuning" href="../mush-dashboard/index.html">Buka dasbor lapangan <svg class="ikon-panah" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></a></p>
+      </div>
+
+      <div class="pita-daftar">
+        <article class="kartu-pita muncul">
+          <h3>Suhu <span>40 sampai 45 &deg;C</span></h3>
+          <div class="pita" role="img" aria-label="Skala suhu 35 sampai 50 derajat, pita target 40 sampai 45. B-024 di 41,2 dalam target. B-025 di 39,4 di bawah target.">
+            <span class="pita-target" style="left:33.3%;width:33.4%"></span>
+            <span class="penanda dalam" style="left:41.3%"><span class="bendera">B-024 · 41,2</span><span class="pita-titik" aria-hidden="true"></span></span>
+            <span class="penanda luar" style="left:29.3%"><span class="bendera">B-025 · 39,4</span><span class="pita-titik" aria-hidden="true"></span></span>
+          </div>
+          <div class="pita-sumbu" aria-hidden="true"><span>35</span><span>50</span></div>
+          <p class="kartu-sisa"><strong>B-024 41,2 &deg;C</strong> dalam target. <strong class="warna-tanah">B-025 39,4 &deg;C</strong> di bawah target, perlu cek tutup drum.</p>
+        </article>
+        <article class="kartu-pita muncul">
+          <h3>Kelembapan <span>55 sampai 70%</span></h3>
+          <div class="pita" role="img" aria-label="Skala kelembapan 45 sampai 80 persen, pita target 55 sampai 70. Kedua batch dalam target.">
+            <span class="pita-target" style="left:28.6%;width:42.8%"></span>
+            <span class="penanda dalam" style="left:48.6%"><span class="bendera">B-024 · 62</span><span class="pita-titik" aria-hidden="true"></span></span>
+            <span class="penanda dalam" style="left:65.7%"><span class="bendera">B-025 · 68</span><span class="pita-titik" aria-hidden="true"></span></span>
+          </div>
+          <div class="pita-sumbu" aria-hidden="true"><span>45</span><span>80</span></div>
+          <p class="kartu-sisa"><strong>B-024 62%</strong> dan <strong>B-025 68%</strong> dalam target.</p>
+        </article>
+        <article class="kartu-pita muncul">
+          <h3>Lama fermentasi <span>7 sampai 14 hari</span></h3>
+          <div class="pita" role="img" aria-label="Skala 0 sampai 16 hari, pita target 7 sampai 14. B-024 hari 9, B-025 hari 4.">
+            <span class="pita-target" style="left:43.75%;width:43.75%"></span>
+            <span class="penanda dalam" style="left:56.25%"><span class="bendera">B-024 · H9</span><span class="pita-titik" aria-hidden="true"></span></span>
+            <span class="penanda luar" style="left:25%"><span class="bendera">B-025 · H4</span><span class="pita-titik" aria-hidden="true"></span></span>
+          </div>
+          <div class="pita-sumbu" aria-hidden="true"><span>0</span><span>16</span></div>
+          <p class="kartu-sisa"><strong>B-024 hari 9 dari 14</strong> (64%). <strong class="warna-tanah">B-025 hari 4 dari 14</strong>, belum masuk jendela panen.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Adegan 07 / 07 · CATATAN -->
+<section class="adegan adegan-terang" id="catatan" aria-labelledby="catatan-judul">
+  <div class="bungkus">
+    <p class="slate" aria-hidden="true">Adegan 07 / 07 · Catatan</p>
+    <div class="catatan-kepala muncul">
+      <h2 class="judul-adegan" id="catatan-judul">Catatan lapangan.</h2>
+      <div class="catatan-meta">
+        <p class="meta-avatar" aria-hidden="true"><span>IX</span></p>
+        <p><strong>Tim SensorIX</strong><br>4 catatan · Sekolah Vokasi IPB</p>
+      </div>
+    </div>
+    <div class="catatan-daftar">
+      <article class="kartu-catatan muncul">
+        <figure class="bingkai bingkai-ikon"><svg viewBox="0 0 200 150" role="img" aria-label="Ilustrasi probe termometer"><use href="#i-termometer"></use></svg></figure>
+        <p class="kartu-sumber"><span class="avatar" aria-hidden="true">IX</span> Tim SensorIX</p>
+        <h3>Probe tanpa kabel di dalam drum</h3>
+        <p>DS18B20 dibaca LGT8F32P bertenaga wireless coil, jadi tidak ada kabel yang menembus segel.</p>
+        <a class="taik" href="../mush-dashboard/index.html">Buka dasbor <svg class="ikon-panah" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></a>
+      </article>
+      <article class="kartu-catatan muncul">
+        <figure class="bingkai"><picture>
+          <source type="image/avif" srcset="img/catatan-2.avif">
+          <source type="image/webp" srcset="img/catatan-2.webp">
+          <img src="img/catatan-2.jpg" alt="Menara antena pemancar sinyal di perbukitan" width="700" height="520" loading="lazy" decoding="async">
+        </picture><span class="foto-penanda">Foto ilustrasi</span></figure>
+        <p class="kartu-sumber"><span class="avatar" aria-hidden="true">IX</span> Tim SensorIX</p>
+        <h3>Radio pendek ke gateway</h3>
+        <p>Sensor mengirim paket via RF433 ke ESP32 di tepi kandang, lalu diteruskan router 4G ke server.</p>
+        <a class="taik" href="../mush-dashboard/index.html">Buka dasbor <svg class="ikon-panah" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></a>
+      </article>
+      <article class="kartu-catatan muncul">
+        <figure class="bingkai"><picture>
+          <source type="image/avif" srcset="img/catatan-3.avif">
+          <source type="image/webp" srcset="img/catatan-3.webp">
+          <img src="img/catatan-3.jpg" alt="Rak server di dalam pusat data" width="700" height="520" loading="lazy" decoding="async">
+        </picture><span class="foto-penanda">Foto ilustrasi</span></figure>
+        <p class="kartu-sumber"><span class="avatar" aria-hidden="true">IX</span> Tim SensorIX</p>
+        <h3>Dua model, satu label</h3>
+        <p>Random Forest memberi label setiap reading, Isolation Forest mencari penyimpangan, lalu keduanya disimpan ke PostgreSQL.</p>
+        <a class="taik" href="../mush-dashboard/index.html">Buka dasbor <svg class="ikon-panah" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></a>
+      </article>
+      <article class="kartu-catatan muncul">
+        <figure class="bingkai"><picture>
+          <source type="image/avif" srcset="img/catatan-4.avif">
+          <source type="image/webp" srcset="img/catatan-4.webp">
+          <img src="img/catatan-4.jpg" alt="Layar komputer menampilkan grafik monitoring" width="700" height="520" loading="lazy" decoding="async">
+        </picture><span class="foto-penanda">Foto ilustrasi</span></figure>
+        <p class="kartu-sumber"><span class="avatar" aria-hidden="true">IX</span> Tim SensorIX</p>
+        <h3>Satu layar untuk keputusan</h3>
+        <p>Dasbor melakukan polling tiap 10 detik, jeda saat tab disembunyikan, dengan batas tunggu 8 detik.</p>
+        <a class="taik" href="../mush-dashboard/index.html">Buka dasbor <svg class="ikon-panah" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-panah"></use></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="kaki">
+  <p class="kaki-kata" aria-hidden="true">MUSH Pagi Farm</p>
+  <div class="bungkus kaki-isi">
+    <div class="kaki-kolom">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#ringkasan">Ringkasan</a></li>
+        <li><a href="#sorot">Sorot</a></li>
+        <li><a href="#alur">Alur kerja</a></li>
+        <li><a href="#ambang">Angka target</a></li>
+        <li><a href="#data">Data contoh</a></li>
+      </ul>
+    </div>
+    <div class="kaki-kolom">
+      <h2>Sistem</h2>
+      <ul>
+        <li>DS18B20</li>
+        <li>RF433</li>
+        <li>ESP32</li>
+        <li>Router 4G</li>
+        <li>Server dan ML</li>
+      </ul>
+    </div>
+    <div class="kaki-kolom">
+      <h2>Sumber</h2>
+      <ul>
+        <li>api-contract.json v3.1</li>
+        <li>config.js dasbor</li>
+        <li>Logbook kelompok 7</li>
+        <li>Proposal MUSH</li>
+      </ul>
+    </div>
+    <div class="kaki-kolom">
+      <h2>Proyek</h2>
+      <ul>
+        <li><a href="../mush-dashboard/index.html">Buka dasbor</a></li>
+        <li><a href="../mush-dashboard/index.html">Dasbor lapangan</a></li>
+        <li><a href="#catatan">Catatan tim</a></li>
+        <li><a href="#ringkasan">Kembali ke atas</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="bungkus kaki-bawah">
+    <p class="m-0"><strong>MUSH</strong> (Made Up Slowly Here) · Tim SensorIX, Sekolah Vokasi IPB, bersama mitra Pagi Farm.</p>
+    <p class="m-0 kaki-kredit">Kredit: Muhammad Nabeel Ar'Rafi · Galih Virgian · Pandu Akmal Fauzan · Riris Mulyanti Yusup · Merlanza Rizki Tumangger · Nita Putri Azahra · Rizki Ramadhani · Rameyza Aulya Putri</p>
+    <p class="m-0 kaki-kredit">Semua foto di halaman ini foto ilustrasi berlisensi bebas dari Openverse dan Wikimedia Commons, bukan dokumentasi lokasi Pagi Farm. Rincian per file di <code>img/CREDITS.json</code>. Kontrak <code>api-contract.json</code> v3.1.</p>
+  </div>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js?v=20261017c"></script>
+<script src="main.js?v=20261018a"></script>
+<script src="cinematic.js?v=20261018a"></script>
+</body>
+</html>
