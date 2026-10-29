@@ -1,5 +1,18 @@
 # MUSH / Landing Page
 
+Product page for MUSH, an IoT fermentation monitoring project.
+
+**Stack:** HTML, Tailwind CSS, vanilla JavaScript
+
+## Portfolio snapshot
+
+- Seven-scene narrative that explains the product and its data flow
+- Local image and animation assets with no CDN dependency
+- Reduced-motion support for visitors who prefer less animation
+- A build check that keeps displayed sample numbers aligned with the dashboard
+
+**Related repository:** [MUSH React dashboard](https://github.com/rizkiramadhani-001/mush-react)
+
 Halaman statis MUSH Pagi Farm: sistem IoT-robotik yang mengubah sayur off-grade
 hidroponik menjadi silase premium. Tujuh adegan (ringkasan, rangkaian, sorot,
 alur, ambang, data, catatan) memakai HTML, CSS Tailwind, dan JavaScript vanilla
